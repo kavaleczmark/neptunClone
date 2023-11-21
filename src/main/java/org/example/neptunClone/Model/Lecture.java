@@ -1,5 +1,6 @@
 package org.example.neptunClone.Model;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "lecture")
+//@Table(name = "lecture")
+@Entity
 public class Lecture {
     @Getter @Setter @Id
     private int id;

@@ -1,12 +1,14 @@
 package org.example.neptunClone.Model;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "teacher")
+//@Table(name = "teacher")
+@Entity
 public class Teacher {
     @Getter @Setter @Id
     private int id;

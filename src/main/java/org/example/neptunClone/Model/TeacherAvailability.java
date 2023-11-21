@@ -1,5 +1,6 @@
 package org.example.neptunClone.Model;
 
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,8 @@ import org.springframework.boot.convert.DataSizeUnit;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "teacher_availability")
+//@Table(name = "teacher_availability")
+@Entity
 public class TeacherAvailability {
     @Getter @Setter @Id
     private int id;
