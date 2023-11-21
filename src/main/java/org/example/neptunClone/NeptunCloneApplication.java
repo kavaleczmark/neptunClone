@@ -8,6 +8,7 @@ public class NeptunCloneApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NeptunCloneApplication.class, args);
+		System.out.println("Hello");
 	}
 
 }
