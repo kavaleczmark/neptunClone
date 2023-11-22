@@ -1,67 +1,35 @@
 package org.example.neptunClone.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.example.neptunClone.Model.Lecture;
+import org.example.neptunClone.Model.Teacher;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
-public class LectureRepository implements CrudRepository {
-    @Override
-    public Object save(Object entity) {
-        return null;
-    }
+//@Repository
+public interface LectureRepository extends JpaRepository<Lecture, Long> {
+    @Query(value="SELECT * FROM lecture", nativeQuery = true)
+    public List<Object[]> getLecture();
 
-    @Override
-    public Iterable saveAll(Iterable entities) {
-        return null;
-    }
+    @Query(value="SELECT * FROM lecture WHERE time=?1", nativeQuery = true)
+    public List<Object[]> getLectureByTime(int time);
 
-    @Override
-    public Optional findById(Object o) {
-        return Optional.empty();
-    }
+    @Query(value="SELECT * FROM lecture WHERE teacher_id=?1", nativeQuery = true)
+    public List<Object[]> getLectureByTeacherId(int teacher_id);
+    @Query(value="SELECT * FROM teacher JOIN lecture ON lecture.teacher_id=teacher.id WHERE teacher.name=?1", nativeQuery = true)
+    public List<Object[]> getLectureByTeacherName(String name);
 
-    @Override
-    public boolean existsById(Object o) {
-        return false;
-    }
+    @Query(value="SELECT * FROM lecture JOIN subject ON lecture.subject_id=subject.id WHERE subject.name=?1", nativeQuery = true)
+    public List<Object[]> getLectureBySubjectName(String name);
 
-    @Override
-    public Iterable findAll() {
-        return null;
-    }
+    @Query(value="SELECT * FROM lecture WHERE classroom_id=?1", nativeQuery = true)
+    public List<Object[]> getLectureByClassroomId(int classroom_id);
 
-    @Override
-    public Iterable findAllById(Iterable iterable) {
-        return null;
-    }
+    @Query(value="SELECT * FROM teacher JOIN classroom ON lecture.classroom_id=classroom.id WHERE classroom.name=?1", nativeQuery = true)
+    public List<Object[]> getLectureByClassroomName(String name);
+    @Query(value="SELECT * FROM lecture WHERE students_places=?1", nativeQuery = true)
+    public List<Object[]> getLectureByStudentsPlaces(int students_places);
 
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Object o) {
-
-    }
-
-    @Override
-    public void delete(Object entity) {
-
-    }
-
-    @Override
-    public void deleteAllById(Iterable iterable) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
 }

@@ -1,11 +1,13 @@
 package org.example.neptunClone.controller;
 
-import org.example.neptunClone.Model.ClassroomAvailability;
+import org.example.neptunClone.Model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ClassroomAvailabilityController {
+public class SubjectController {
+
     @Autowired
-    private ClassroomAvailability classroomAvailability;
+    Subject subject;
+
 }

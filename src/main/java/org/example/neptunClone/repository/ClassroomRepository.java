@@ -1,67 +1,23 @@
 package org.example.neptunClone.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.example.neptunClone.Model.Classroom;
+import org.example.neptunClone.Model.Teacher;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
-public class ClassroomRepository implements CrudRepository {
-    @Override
-    public Object save(Object entity) {
-        return null;
-    }
+//@Repository
+public interface ClassroomRepository extends JpaRepository<Classroom, Long> {
 
-    @Override
-    public Iterable saveAll(Iterable entities) {
-        return null;
-    }
+    @Query(value="SELECT * FROM classroom", nativeQuery = true)
+    public List<Object[]> getClassroom();
 
-    @Override
-    public Optional findById(Object o) {
-        return Optional.empty();
-    }
+    @Query(value="SELECT * FROM classroom WHERE name='?1'", nativeQuery = true)
+    public Classroom getClassroomByName(String name);
 
-    @Override
-    public boolean existsById(Object o) {
-        return false;
-    }
+    @Query(value="SELECT * FROM classroom WHERE places='?1'", nativeQuery = true)
+    public Classroom getClassroomByPlaces(int places);
 
-    @Override
-    public Iterable findAll() {
-        return null;
-    }
-
-    @Override
-    public Iterable findAllById(Iterable iterable) {
-        return null;
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void deleteById(Object o) {
-
-    }
-
-    @Override
-    public void delete(Object entity) {
-
-    }
-
-    @Override
-    public void deleteAllById(Iterable iterable) {
-
-    }
-
-    @Override
-    public void deleteAll(Iterable entities) {
-
-    }
-
-    @Override
-    public void deleteAll() {
-
-    }
 }

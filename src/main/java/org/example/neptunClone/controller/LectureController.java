@@ -9,4 +9,5 @@ public class LectureController {
 
     @Autowired
     private Lecture lecture;
+
 }
