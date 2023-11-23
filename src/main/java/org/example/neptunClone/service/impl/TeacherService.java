@@ -1,13 +1,13 @@
-package org.example.neptunClone.service;
+package org.example.neptunClone.service.impl;
 
-import org.example.neptunClone.Model.Teacher;
+import org.example.neptunClone.model.Teacher;
 import org.example.neptunClone.repository.TeacherRepository;
+import org.example.neptunClone.service.TeacherServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
-public class TeacherService implements TeacherServiceInterface{
+public class TeacherService implements TeacherServiceInterface {
 
     @Autowired
     TeacherRepository teacherRepository;
@@ -17,8 +17,8 @@ public class TeacherService implements TeacherServiceInterface{
     }
 
     @Override
-    public Optional<Teacher> getTeacherById(Long id) {
-        return teacherRepository.findById(id);
+    public Teacher getTeacherById(Long id) {
+        return teacherRepository.getTeacherById(id);
     }
 
     @Override

@@ -1,13 +1,12 @@
 package org.example.neptunClone.service;
 
-import org.example.neptunClone.Model.Classroom;
+import org.example.neptunClone.model.Classroom;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
 public interface ClassroomServiceInterface {
-    Collection<Classroom> getAllClassroom();
-    Optional<Classroom> getClassroomById(Long id);
+    List<Object[]> getAllClassroom();
+    Classroom getClassroomById(Long id);
     Classroom getClassroomByName(String name);
 
 

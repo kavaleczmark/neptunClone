@@ -1,13 +1,13 @@
-package org.example.neptunClone.service;
+package org.example.neptunClone.service.impl;
 
-import org.example.neptunClone.Model.Subject;
+import org.example.neptunClone.model.Subject;
 import org.example.neptunClone.repository.SubjectRepository;
+import org.example.neptunClone.service.SubjectServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
-public class SubjectService implements SubjectServiceInterface{
+public class SubjectService implements SubjectServiceInterface {
 
     @Autowired
     private SubjectRepository subjectRepository;
@@ -17,8 +17,8 @@ public class SubjectService implements SubjectServiceInterface{
     }
 
     @Override
-    public Optional<Subject> getSubjectById(Long id) {
-        return subjectRepository.findById(id);
+    public Subject getSubjectById(Long id) {
+        return subjectRepository.getSubjectById(id);
     }
 
     @Override

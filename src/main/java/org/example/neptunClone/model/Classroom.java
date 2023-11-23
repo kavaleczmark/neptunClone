@@ -1,4 +1,4 @@
-package org.example.neptunClone.Model;
+package org.example.neptunClone.model;
 
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Size;

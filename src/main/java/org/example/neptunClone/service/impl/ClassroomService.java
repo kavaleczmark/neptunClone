@@ -1,24 +1,24 @@
-package org.example.neptunClone.service;
+package org.example.neptunClone.service.impl;
 
-import org.example.neptunClone.Model.Classroom;
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.repository.ClassroomRepository;
+import org.example.neptunClone.service.ClassroomServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.List;
 
-public class ClassroomService implements ClassroomServiceInterface{
+public class ClassroomService implements ClassroomServiceInterface {
 
     @Autowired
     ClassroomRepository classroomRepository;
     @Override
-    public Collection<Classroom> getAllClassroom() {
-        return classroomRepository.findAll();
+    public List<Object[]> getAllClassroom() {
+        return classroomRepository.getClassroom();
     }
 
     @Override
-    public Optional<Classroom> getClassroomById(Long id) {
-        return classroomRepository.findById(id);
+    public Classroom getClassroomById(Long id) {
+        return classroomRepository.getClassroomById(id);
     }
 
     @Override

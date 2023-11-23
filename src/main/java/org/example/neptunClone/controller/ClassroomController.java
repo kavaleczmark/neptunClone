@@ -1,31 +1,44 @@
 package org.example.neptunClone.controller;
 
-import org.example.neptunClone.Model.Classroom;
-import org.example.neptunClone.repository.ClassroomRepository;
+import org.example.neptunClone.model.Classroom;
+import org.example.neptunClone.service.impl.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 public class ClassroomController {
-
     @Autowired
-    private Classroom classroom;
-    @Autowired
-    private ClassroomRepository classroomRepository;
+    private ClassroomService classroomService;
 
     @GetMapping(path = "/classroom")
-    public List getAllClassroom() {
-        return classroomRepository.findAll();
+    public List<Object[]> getAllClassroom() {
+        return classroomService.getAllClassroom();
     }
 
+    @GetMapping(path = "/classroom/{ID}")
+    public Classroom getClassroomById(@RequestParam("ID") Long id) {
+        return classroomService.getClassroomById(id);
+    }
+
+    @GetMapping(path = "/classroom/{name}")
+    public Classroom getClassroomByName(@RequestParam("name") String name) {
+        return classroomService.getClassroomByName(name);
+    }
+
+
+    @GetMapping(path = "/classroom/{places}")
+    public Classroom getClassroomByPlaces(@RequestParam("places") int places) {
+        return classroomService.getClassroomByPlaces(places);
+    }
+}
     /*
     *
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewUser(@RequestParam String firstName, @RequestParam String firstName, @RequestParam String email) {
+    public @ResponseBody String addNewUser(@RequestSParam String firstName, @RequestParam String firstName, @RequestParam String email) {
 
         UserEntity user = new UserEntity();
         user.setFirstName(firstName);
@@ -35,4 +48,4 @@ public class ClassroomController {
         return "User Created";
     }
 */
-}
+
