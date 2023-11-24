@@ -2,12 +2,12 @@ package org.example.neptunClone.repository;
 
 
 import org.example.neptunClone.model.Subject;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-// extends JpaRepository<Subject, Long>
+@Repository
 public interface SubjectRepository{
 
     @Query(value = "SELECT * FROM subject", nativeQuery = true)

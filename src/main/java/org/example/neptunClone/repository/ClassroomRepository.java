@@ -1,13 +1,12 @@
 package org.example.neptunClone.repository;
 
 import org.example.neptunClone.model.Classroom;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//@Repository
-// extends JpaRepository<Classroom, Long>
+@Repository
 public interface ClassroomRepository {
 
     @Query(value="SELECT * FROM classroom", nativeQuery = true)

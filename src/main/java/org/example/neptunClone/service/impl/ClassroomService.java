@@ -4,13 +4,22 @@ import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.repository.ClassroomRepository;
 import org.example.neptunClone.service.ClassroomServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClassroomService implements ClassroomServiceInterface {
 
-    @Autowired
-    ClassroomRepository classroomRepository;
+//    @Autowired
+    private ClassroomRepository classroomRepository;
+
+    public ClassroomService() {}
+
+    public ClassroomService(ClassroomRepository classroomRepository) {
+        this.classroomRepository = classroomRepository;
+    }
+
     @Override
     public List<Object[]> getAllClassroom() {
         return classroomRepository.getClassroom();

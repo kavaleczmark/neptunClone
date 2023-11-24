@@ -4,13 +4,22 @@ import org.example.neptunClone.model.Teacher;
 import org.example.neptunClone.repository.TeacherRepository;
 import org.example.neptunClone.service.TeacherServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TeacherService implements TeacherServiceInterface {
 
-    @Autowired
-    TeacherRepository teacherRepository;
+    //@Autowired
+    private TeacherRepository teacherRepository;
+
+    public TeacherService() {}
+
+    public TeacherService(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
+
     @Override
     public List<Object[]> getAllTeacher() {
         return teacherRepository.getTeacher();

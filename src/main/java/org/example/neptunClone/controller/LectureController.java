@@ -14,6 +14,10 @@ public class LectureController {
     @Autowired
     private LectureService lectureService;
 
+    public LectureController(LectureService lectureService) {
+        this.lectureService = lectureService;
+    }
+
     @GetMapping("/lecture")
     public List<Object[]> getAllLecture(){
         return lectureService.getAllLecture();
@@ -42,5 +46,15 @@ public class LectureController {
     @GetMapping("/lecture/{time}")
     public List<Object[]> getLectureByTime(@RequestParam("time") int time){
         return lectureService.getLectureByTime(time);
+    }
+
+    @GetMapping("/lecture/{classroom}")
+    public List<Object[]> getLectureByClassroom(@RequestParam("classroom") String classroom){
+        return lectureService.getLectureByClassroom(classroom);
+    }
+
+    @GetMapping("/lecture/{studentsplaces}")
+    public List<Object[]> getLectureByStudentsPlaces(@RequestParam("studentsplaces") int studentsPlaces){
+        return lectureService.getLectureByTime(studentsPlaces);
     }
 }

@@ -3,13 +3,22 @@ package org.example.neptunClone.service.impl;
 import org.example.neptunClone.repository.LectureRepository;
 import org.example.neptunClone.service.LectureServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LectureService implements LectureServiceInterface {
 
-    @Autowired
+   // @Autowired
     private LectureRepository lectureRepository;
+
+    public LectureService() {}
+
+    public LectureService(LectureRepository lectureRepository) {
+        this.lectureRepository = lectureRepository;
+    }
+
     @Override
     public List<Object[]> getAllLecture() {
         return lectureRepository.getLecture();

@@ -1,6 +1,8 @@
 package org.example.neptunClone.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(name = "classroom")
 public class Classroom {
     @Getter @Setter @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Getter @Setter
     @Size(min = 1)
@@ -21,8 +24,7 @@ public class Classroom {
     @Size(min = 1, max = 200)
     private int places;
 
-    @Autowired
-
+//    @Autowired
     public Classroom(int id, String name, int places) {
         this.id = id;
         this.name = name;
