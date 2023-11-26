@@ -1,0 +1,7 @@
+//INSERT SCRIPTS
+
+//// Classroom inserts start
+
+INSERT INTO classroom VALUES ('C', 35);
+
+//// Classroom inserts end
