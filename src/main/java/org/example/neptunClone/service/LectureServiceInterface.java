@@ -1,5 +1,6 @@
 package org.example.neptunClone.service;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.util.List;
 
 public interface LectureServiceInterface {
 
+    boolean addLecture(Lecture lecture) throws SQLException;
     List<Lecture> getAllLecture() throws SQLException;
     Lecture getLecturerById(int id) throws SQLException;
     List<Lecture> getLectureByTeacherId(int id) throws SQLException;

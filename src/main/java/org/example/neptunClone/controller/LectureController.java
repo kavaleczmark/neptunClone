@@ -1,8 +1,11 @@
 package org.example.neptunClone.controller;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.service.impl.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -47,5 +50,15 @@ public class LectureController {
     @GetMapping(path = "/places", params = "count")
     public List<Lecture> getLectureByStudentsPlaces(@RequestParam("count") int places) throws SQLException {
         return lectureService.getLectureByStudentsPlaces(places);
+    }
+
+    @PostMapping(path = "/")
+    public ResponseEntity<Void> insertLecture(@RequestBody Lecture lecture) throws SQLException {
+        boolean result = lectureService.addLecture(lecture);
+        if (result) {
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 }

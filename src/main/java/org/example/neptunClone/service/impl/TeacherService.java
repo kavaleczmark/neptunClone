@@ -22,6 +22,11 @@ public class TeacherService implements TeacherServiceInterface {
     }
 
     @Override
+    public boolean addTeacher(Teacher teacher) throws SQLException {
+        return teacherRepositoryInterface.insertTeacher(teacher);
+    }
+
+    @Override
     public List<Teacher> getAllTeacher() throws SQLException {
         return teacherRepositoryInterface.getTeacher();
     }

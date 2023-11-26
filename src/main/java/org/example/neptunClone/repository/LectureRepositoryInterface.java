@@ -1,5 +1,6 @@
 package org.example.neptunClone.repository;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,7 @@ public interface LectureRepositoryInterface {
     public List<Lecture> getLectureByClassroomId(int classroom_id) throws SQLException;
     public List<Lecture> getLectureBySubjectId(int subject_id) throws SQLException;
     public List<Lecture> getLectureByStudentsPlaces(int students_places) throws SQLException;
+
+    public boolean insertLecture(Lecture lecture);
 
 }

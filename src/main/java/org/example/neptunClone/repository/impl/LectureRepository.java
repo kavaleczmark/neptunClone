@@ -1,5 +1,6 @@
 package org.example.neptunClone.repository.impl;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.repository.LectureRepositoryInterface;
 import org.springframework.stereotype.Repository;
@@ -51,6 +52,12 @@ public class LectureRepository extends GenericDataAccess<Lecture> implements Lec
     public List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException {
         String sqlQuery = String.format("SELECT * FROM lecture where places = %d;", places);
         return query(sqlQuery);
+    }
+
+    @Override
+    public boolean insertLecture(Lecture lecture) {
+        int rowsAffected = upsert(String.format("INSERT INTO lecture (time, places, teacher_id, classroom_id, subject_id) VALUES (%d, %d, %d, %d, %d);", lecture.getTime(), lecture.getPlaces(), lecture.getTeacher_id(), lecture.getClassroom_id(), lecture.getSubject_id()));
+        return rowsAffected == 1;
     }
 
     @Override

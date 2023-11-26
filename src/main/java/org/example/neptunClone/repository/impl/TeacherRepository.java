@@ -1,5 +1,6 @@
 package org.example.neptunClone.repository.impl;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Teacher;
 import org.example.neptunClone.repository.TeacherRepositoryInterface;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,11 @@ public class TeacherRepository extends GenericDataAccess<Teacher> implements Tea
         return query(sqlQuery);
     }
 
+    @Override
+    public boolean insertTeacher(Teacher teacher) {
+        int rowsAffected = upsert(String.format("INSERT INTO teacher (name, subject_id) VALUES ('%s', %d);", teacher.getName(), teacher.getSubject_id()));
+        return rowsAffected == 1;
+    }
     @Override
     List<Teacher> map(ResultSet resultSet) throws SQLException {
         List<Teacher> teachers = new ArrayList<>();

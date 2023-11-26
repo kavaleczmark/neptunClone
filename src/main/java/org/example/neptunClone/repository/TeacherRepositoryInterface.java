@@ -1,5 +1,6 @@
 package org.example.neptunClone.repository;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Teacher;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,7 @@ public interface TeacherRepositoryInterface {
     public Teacher getTeacherById(int id) throws SQLException;
     public Teacher getTeacherByName(String name) throws SQLException;
     public List<Teacher> getTeacherBySubjectId(int subject_id) throws SQLException;
+
+    public boolean insertTeacher(Teacher teacher);
 
 }

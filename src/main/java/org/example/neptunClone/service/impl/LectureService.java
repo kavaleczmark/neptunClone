@@ -23,6 +23,11 @@ public class LectureService implements LectureServiceInterface {
     }
 
     @Override
+    public boolean addLecture(Lecture lecture) throws SQLException {
+        return lectureRepositoryInterface.insertLecture(lecture);
+    }
+
+    @Override
     public List<Lecture> getAllLecture() throws SQLException {
         return lectureRepositoryInterface.getLecture();
     }
