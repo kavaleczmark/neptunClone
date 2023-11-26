@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -18,7 +17,7 @@ public class Lecture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Getter @Setter
-    private String subject_id;
+    private int subject_id;
     @Getter @Setter
     @Size(min = 8, max = 19)
     private int time;
@@ -27,16 +26,15 @@ public class Lecture {
     @Getter @Setter
     private int classroom_id;
     @Getter @Setter
-    private int students_places;
+    private int places;
 
-//    @Autowired
-    public Lecture(int id, String subject_id, int time, int teacher_id, int classroom_id, int students_places) {
+    public Lecture(int id, int time, int places, int teacher_id, int classroom_id, int subject_id) {
         this.id = id;
-        this.subject_id = subject_id;
         this.time = time;
+        this.places = places;
         this.teacher_id = teacher_id;
         this.classroom_id = classroom_id;
-        this.students_places = students_places;
+        this.subject_id = subject_id;
     }
 
 }

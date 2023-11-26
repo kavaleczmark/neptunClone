@@ -19,7 +19,6 @@ public class Subject {
     @Getter @Setter
     private String name;
 
-//    @Autowired
     public Subject(int id, String name) {
         this.id = id;
         this.name = name;

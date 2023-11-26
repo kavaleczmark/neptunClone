@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -18,16 +17,14 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Getter @Setter
-    @Size(min = 1)
     private String name;
     @Getter @Setter
-    @Size(min = 1, max = 200)
-    private int places;
+    private int spaces;
 
-//    @Autowired
-    public Classroom(int id, String name, int places) {
+
+    public Classroom(int id, String name, int spaces) {
         this.id = id;
         this.name = name;
-        this.places = places;
+        this.spaces = spaces;
     }
 }
