@@ -1,60 +1,51 @@
 package org.example.neptunClone.controller;
 
+import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.service.impl.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/lecture")
 public class LectureController {
 
     @Autowired
     private LectureService lectureService;
 
-    public LectureController(LectureService lectureService) {
-        this.lectureService = lectureService;
-    }
-
-    @GetMapping("/lecture")
-    public List<Object[]> getAllLecture(){
+    @GetMapping(path = "/")
+    public List<Lecture> getAllLecture() throws SQLException {
         return lectureService.getAllLecture();
     }
 
-    @GetMapping("/lecture/{ID}")
-    public List<Object[]> getLectureById(@RequestParam("ID") Long id){
+    @GetMapping(path = "/{id}")
+    public Lecture getLectureById(@PathVariable int id) throws SQLException {
         return lectureService.getLecturerById(id);
     }
 
-    @GetMapping("/lecture/{teacher_name}")
-    public List<Object[]> getLectureByTeacherName(@RequestParam("teacher_name") String teacherName){
-        return lectureService.getLectureByTeacher(teacherName);
-    }
-
-    @GetMapping("/lecture/{teacher_id}")
-    public List<Object[]> getLectureByTeacherId(@RequestParam("teacher_id") Long id){
+    @GetMapping(path = "/teacher_id", params = "teacherId")
+    public List<Lecture> getLectureByTeacherId(@RequestParam("teacherId") int id) throws SQLException {
         return lectureService.getLectureByTeacherId(id);
     }
 
-    @GetMapping("/lecture/{subject}")
-    public List<Object[]> getLectureBySubjectName(@RequestParam("subject") String subject){
-        return lectureService.getLectureBySubject(subject);
+    @GetMapping(path = "/subject_id", params = "subjectId")
+    public List<Lecture> getLectureBySubjectId(@RequestParam("subjectId") int id) throws SQLException {
+        return lectureService.getLectureBySubjectId(id);
+    }
+    @GetMapping(path = "/classroom_id", params = "classroomId")
+    public List<Lecture> getLectureByClassroom(@RequestParam("classroomId") int id) throws SQLException {
+        return lectureService.getLectureByClassroomId(id);
     }
 
-    @GetMapping("/lecture/{time}")
-    public List<Object[]> getLectureByTime(@RequestParam("time") int time){
+    @GetMapping(path = "/time", params = "time")
+    public List<Lecture> getLectureByTime(@RequestParam("time") int time) throws SQLException {
         return lectureService.getLectureByTime(time);
     }
 
-    @GetMapping("/lecture/{classroom}")
-    public List<Object[]> getLectureByClassroom(@RequestParam("classroom") String classroom){
-        return lectureService.getLectureByClassroom(classroom);
-    }
-
-    @GetMapping("/lecture/{studentsplaces}")
-    public List<Object[]> getLectureByStudentsPlaces(@RequestParam("studentsplaces") int studentsPlaces){
-        return lectureService.getLectureByTime(studentsPlaces);
+    @GetMapping(path = "/places", params = "count")
+    public List<Lecture> getLectureByStudentsPlaces(@RequestParam("count") int places) throws SQLException {
+        return lectureService.getLectureByStudentsPlaces(places);
     }
 }

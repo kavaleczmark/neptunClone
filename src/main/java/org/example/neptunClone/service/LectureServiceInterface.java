@@ -1,17 +1,19 @@
 package org.example.neptunClone.service;
 
+import org.example.neptunClone.model.Lecture;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface LectureServiceInterface {
 
-    List<Object[]> getAllLecture();
-    List<Object[]> getLecturerById(Long id);
-    List<Object[]> getLectureByTeacher(String teacher);
-    List<Object[]> getLectureByTeacherId(Long id);
-    List<Object[]> getLectureBySubject(String subject);
-    List<Object[]> getLectureByTime(int time);
-    List<Object[]> getLectureByClassroom(String name);
-    List<Object[]> getLectureByStudentsPlaces(int places);
+    List<Lecture> getAllLecture() throws SQLException;
+    Lecture getLecturerById(int id) throws SQLException;
+    List<Lecture> getLectureByTeacherId(int id) throws SQLException;
+    List<Lecture> getLectureBySubjectId(int id) throws SQLException;
+    List<Lecture> getLectureByTime(int time) throws SQLException;
+    List<Lecture> getLectureByClassroomId(int id) throws SQLException;
+    List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException;
 
     /****************************/
     void deleteLecture(Long id);

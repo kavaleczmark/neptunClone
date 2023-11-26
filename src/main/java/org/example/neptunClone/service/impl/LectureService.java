@@ -1,62 +1,59 @@
 package org.example.neptunClone.service.impl;
 
-import org.example.neptunClone.repository.LectureRepository;
+import org.example.neptunClone.model.Lecture;
+import org.example.neptunClone.repository.LectureRepositoryInterface;
 import org.example.neptunClone.service.LectureServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
 public class LectureService implements LectureServiceInterface {
 
-   // @Autowired
-    private LectureRepository lectureRepository;
+    @Autowired
+    private LectureRepositoryInterface lectureRepositoryInterface;
 
-    public LectureService() {}
+    public LectureService() {
+    }
 
-    public LectureService(LectureRepository lectureRepository) {
-        this.lectureRepository = lectureRepository;
+    public LectureService(LectureRepositoryInterface lectureRepositoryInterface) {
+        this.lectureRepositoryInterface = lectureRepositoryInterface;
     }
 
     @Override
-    public List<Object[]> getAllLecture() {
-        return lectureRepository.getLecture();
+    public List<Lecture> getAllLecture() throws SQLException {
+        return lectureRepositoryInterface.getLecture();
     }
 
     @Override
-    public List<Object[]> getLecturerById(Long id) {
-        return lectureRepository.getLectureById(id);
+    public Lecture getLecturerById(int id) throws SQLException {
+        return lectureRepositoryInterface.getLectureById(id);
     }
 
     @Override
-    public List<Object[]> getLectureByTeacher(String teacherName) {
-        return lectureRepository.getLectureByTeacherName(teacherName);
+    public List<Lecture> getLectureByTeacherId(int id) throws SQLException {
+        return lectureRepositoryInterface.getLectureByTeacherId(id);
     }
 
     @Override
-    public List<Object[]> getLectureByTeacherId(Long id) {
-        return lectureRepository.getLectureByTeacherId(id);
+    public List<Lecture> getLectureByClassroomId(int classroom_id) throws SQLException {
+        return lectureRepositoryInterface.getLectureByClassroomId(classroom_id);
     }
 
     @Override
-    public List<Object[]> getLectureBySubject(String subjectName) {
-        return lectureRepository.getLectureBySubjectName(subjectName);
+    public List<Lecture> getLectureBySubjectId(int subject_id) throws SQLException {
+        return lectureRepositoryInterface.getLectureBySubjectId(subject_id);
+    }
+    @Override
+    public List<Lecture> getLectureByTime(int time) throws SQLException {
+        return lectureRepositoryInterface.getLectureByTime(time);
     }
 
     @Override
-    public List<Object[]> getLectureByTime(int time) {
-        return lectureRepository.getLectureByTime(time);
-    }
-
-    @Override
-    public List<Object[]> getLectureByClassroom(String classroomName) {
-        return lectureRepository.getLectureByClassroomName(classroomName);
-    }
-
-    @Override
-    public List<Object[]> getLectureByStudentsPlaces(int places) {
-        return lectureRepository.getLectureByStudentsPlaces(places);
+    public List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException {
+        return lectureRepositoryInterface.getLectureByStudentsPlaces(places);
     }
 
     // TODO implement rest of CRUD

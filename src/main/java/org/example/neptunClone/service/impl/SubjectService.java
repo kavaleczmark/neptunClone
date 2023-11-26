@@ -1,37 +1,38 @@
 package org.example.neptunClone.service.impl;
 
 import org.example.neptunClone.model.Subject;
-import org.example.neptunClone.repository.SubjectRepository;
+import org.example.neptunClone.repository.SubjectRepositoryInterface;
 import org.example.neptunClone.service.SubjectServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
 public class SubjectService implements SubjectServiceInterface {
 
-    //@Autowired
-    private SubjectRepository subjectRepository;
+    @Autowired
+    private SubjectRepositoryInterface subjectRepositoryInterface;
 
     public SubjectService() {}
 
-    public SubjectService(SubjectRepository subjectRepository) {
-        this.subjectRepository = subjectRepository;
+    public SubjectService(SubjectRepositoryInterface subjectRepositoryInterface) {
+        this.subjectRepositoryInterface = subjectRepositoryInterface;
     }
 
     @Override
-    public List<Object[]> getAllSubject() {
-        return subjectRepository.getSubject();
+    public List<Subject> getAllSubject() throws SQLException {
+        return subjectRepositoryInterface.getSubject();
     }
 
     @Override
-    public Subject getSubjectById(Long id) {
-        return subjectRepository.getSubjectById(id);
+    public Subject getSubjectById(int id) throws SQLException {
+        return subjectRepositoryInterface.getSubjectById(id);
     }
 
     @Override
-    public Subject getSubjectByName(String name) {
-        return subjectRepository.getSubjectByName(name);
+    public Subject getSubjectByName(String name) throws SQLException {
+        return subjectRepositoryInterface.getSubjectByName(name);
     }
 }
