@@ -54,10 +54,12 @@ public class SubjectController {
     /*          UPDATE         */
 
     @PutMapping(path = "/", params = "id")
-    public Subject updateSubject(@RequestBody Subject newSubject, @RequestParam int id) throws SQLException {
+    public ResponseEntity<Void> updateSubject(@RequestBody Subject newSubject, @RequestParam int id) throws SQLException {
         Subject subject = subjectService.getSubjectById(id);
         subject.setName(newSubject.getName());
-        subjectService.updateSubject(subject);
-        return subject;
+        if(subjectService.updateSubject(subject)){
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 }
