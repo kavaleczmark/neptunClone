@@ -1,6 +1,5 @@
 package org.example.neptunClone.controller;
 
-import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.service.impl.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ public class LectureController {
 
     @Autowired
     private LectureService lectureService;
+
 
     @GetMapping(path = "/")
     public List<Lecture> getAllLecture() throws SQLException {
@@ -58,7 +58,6 @@ public class LectureController {
         if (result) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
-
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 }

@@ -27,6 +27,11 @@ public class ClassroomService implements ClassroomServiceInterface {
     }
 
     @Override
+    public boolean updateClassroom(Classroom classroom) {
+        return classroomRepository.updateClassroom(classroom);
+    }
+
+    @Override
     public List<Classroom> getAllClassroom() throws SQLException {
         return classroomRepository.getClassroom();
     }

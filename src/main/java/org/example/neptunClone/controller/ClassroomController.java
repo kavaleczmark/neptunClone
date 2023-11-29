@@ -20,6 +20,9 @@ public class ClassroomController {
         this.classroomService = classroomService;
     }
 
+
+
+    /*          READ         */
     @GetMapping(path = "/")
     public List<Classroom> getAllClassroom() throws SQLException {
         return classroomService.getAllClassroom();
@@ -40,6 +43,8 @@ public class ClassroomController {
         return classroomService.getClassroomByPlaces(places);
     }
 
+    /*          CREATE         */
+
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertClassroom(@RequestBody Classroom classroom) {
         boolean result = classroomService.addClassroom(classroom);
@@ -48,5 +53,15 @@ public class ClassroomController {
         }
 
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
+
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public Classroom updateClassroom(@RequestBody Classroom newClassroom, @RequestParam int id) throws SQLException {
+        Classroom classroom = classroomService.getClassroomById(id);
+        classroom.setName(newClassroom.getName());
+        classroom.setSpaces(newClassroom.getSpaces());
+        return classroom;
     }
 }
