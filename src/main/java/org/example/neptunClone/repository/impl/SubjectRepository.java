@@ -1,6 +1,5 @@
 package org.example.neptunClone.repository.impl;
 
-import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Subject;
 import org.example.neptunClone.repository.SubjectRepositoryInterface;
 import org.springframework.stereotype.Repository;
@@ -37,9 +36,15 @@ public class SubjectRepository extends GenericDataAccess<Subject> implements Sub
     }
 
     @Override
+    public boolean updateSubject(Subject subject) {
+        int rowsAffected = upsert(String.format("UPDATE subject SET name = '%s' WHERE id = %d;", subject.getName(), subject.getId()));
+        return rowsAffected == 1;
+    }
+
+    @Override
     List<Subject> map(ResultSet resultSet) throws SQLException {
         List<Subject> subjects = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             int id = resultSet.getInt(1);
             String name = resultSet.getString(2);
             subjects.add(new Subject(id, name));

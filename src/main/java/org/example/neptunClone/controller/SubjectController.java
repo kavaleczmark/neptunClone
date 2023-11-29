@@ -1,6 +1,7 @@
 package org.example.neptunClone.controller;
 
 import org.example.neptunClone.model.Classroom;
+import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.model.Subject;
 import org.example.neptunClone.service.impl.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
+    /*          READ         */
     @GetMapping(path = "/")
     public List<Subject> getAllSubject() throws SQLException {
         return subjectService.getAllSubject();
@@ -37,6 +39,8 @@ public class SubjectController {
         return subjectService.getSubjectByName(name);
     }
 
+    /*          CREATE         */
+
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertSubject(@RequestBody Subject subject) throws SQLException {
         boolean result = subjectService.addSubject(subject);
@@ -45,5 +49,15 @@ public class SubjectController {
         }
 
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
+
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public Subject updateSubject(@RequestBody Subject newSubject, @RequestParam int id) throws SQLException {
+        Subject subject = subjectService.getSubjectById(id);
+        subject.setName(newSubject.getName());
+        subjectService.updateSubject(subject);
+        return subject;
     }
 }
