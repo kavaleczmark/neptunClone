@@ -1,5 +1,6 @@
 package org.example.neptunClone.controller;
 
+import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Lecture;
 import org.example.neptunClone.service.impl.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class LectureController {
     @Autowired
     private LectureService lectureService;
 
+
+    /*          READ         */
 
     @GetMapping(path = "/")
     public List<Lecture> getAllLecture() throws SQLException {
@@ -52,6 +55,8 @@ public class LectureController {
         return lectureService.getLectureByStudentsPlaces(places);
     }
 
+    /*          CREATE         */
+
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertLecture(@RequestBody Lecture lecture) throws SQLException {
         boolean result = lectureService.addLecture(lecture);
@@ -59,5 +64,19 @@ public class LectureController {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
+
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public Lecture updateLecture(@RequestBody Lecture newLecture, @RequestParam int id) throws SQLException {
+        Lecture lecture = lectureService.getLecturerById(id);
+        lecture.setTime(newLecture.getTime());
+        lecture.setPlaces(newLecture.getPlaces());
+        lecture.setTeacher_id(newLecture.getTeacher_id());
+        lecture.setClassroom_id(newLecture.getClassroom_id());
+        lecture.setSubject_id(newLecture.getSubject_id());
+        lectureService.updateLecture(lecture);
+        return lecture;
     }
 }

@@ -62,6 +62,7 @@ public class ClassroomController {
         Classroom classroom = classroomService.getClassroomById(id);
         classroom.setName(newClassroom.getName());
         classroom.setSpaces(newClassroom.getSpaces());
+        classroomService.updateClassroom(classroom);
         return classroom;
     }
 }

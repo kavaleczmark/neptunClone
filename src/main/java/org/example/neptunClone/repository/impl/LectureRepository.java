@@ -61,6 +61,12 @@ public class LectureRepository extends GenericDataAccess<Lecture> implements Lec
     }
 
     @Override
+    public boolean updateLecture(Lecture lecture) {
+        int rowsAffected = upsert(String.format("UPDATE lecture SET time = %d, places = %d, teacher_id = %d, classroom_id = %d, subject_id = %d WHERE id = %d;", lecture.getTime(), lecture.getPlaces(), lecture.getTeacher_id(), lecture.getClassroom_id(), lecture.getSubject_id(), lecture.getId()));
+        return rowsAffected == 1;
+    }
+
+    @Override
     List<Lecture> map(ResultSet resultSet) throws SQLException {
         List<Lecture> lectures = new ArrayList<>();
         while (resultSet.next()){

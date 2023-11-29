@@ -19,4 +19,6 @@ public interface LectureRepositoryInterface {
 
     public boolean insertLecture(Lecture lecture);
 
+    public boolean updateLecture(Lecture lecture);
+
 }
