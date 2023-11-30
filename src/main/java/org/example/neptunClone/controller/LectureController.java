@@ -18,6 +18,9 @@ public class LectureController {
     @Autowired
     private LectureService lectureService;
 
+
+    /*          READ         */
+
     @GetMapping(path = "/")
     public List<Lecture> getAllLecture() throws SQLException {
         return lectureService.getAllLecture();
@@ -52,13 +55,30 @@ public class LectureController {
         return lectureService.getLectureByStudentsPlaces(places);
     }
 
+    /*          CREATE         */
+
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertLecture(@RequestBody Lecture lecture) throws SQLException {
         boolean result = lectureService.addLecture(lecture);
         if (result) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
 
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public ResponseEntity<Void> updateLecture(@RequestBody Lecture newLecture, @RequestParam int id) throws SQLException {
+        Lecture lecture = lectureService.getLecturerById(id);
+        lecture.setTime(newLecture.getTime());
+        lecture.setPlaces(newLecture.getPlaces());
+        lecture.setTeacher_id(newLecture.getTeacher_id());
+        lecture.setClassroom_id(newLecture.getClassroom_id());
+        lecture.setSubject_id(newLecture.getSubject_id());
+        if(lectureService.updateLecture(lecture)){
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 }

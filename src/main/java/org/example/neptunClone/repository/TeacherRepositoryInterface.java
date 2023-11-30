@@ -16,4 +16,6 @@ public interface TeacherRepositoryInterface {
 
     public boolean insertTeacher(Teacher teacher);
 
+    public boolean updateTeacher(Teacher teacher);
+
 }
