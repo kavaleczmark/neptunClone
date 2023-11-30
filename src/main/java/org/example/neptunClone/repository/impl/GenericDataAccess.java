@@ -28,11 +28,10 @@ public abstract class GenericDataAccess<T> implements GenericDataAccessInterface
             throw new RuntimeException(e);
         }
     }
-
     // insert and update
     public int upsert(String sqlQuery) {
         try(Connection connection = DriverManager.getConnection(dbUrl, user, pw)){
-            return updateImpl(connection, sqlQuery);
+            return upsertImpl(connection, sqlQuery);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -43,7 +42,7 @@ public abstract class GenericDataAccess<T> implements GenericDataAccessInterface
         return resultSet;
     }
 
-    private int updateImpl(Connection connection, String sqlQuery) throws SQLException {
+    private int upsertImpl(Connection connection, String sqlQuery) throws SQLException {
         return createStatement(connection).executeUpdate(sqlQuery);
     }
 

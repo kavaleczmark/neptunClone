@@ -31,15 +31,22 @@ public class ClassroomRepository extends GenericDataAccess<Classroom> implements
 
     @Override
     public Classroom getClassroomByPlaces(int places) throws SQLException {
-        String sqlQuery = String.format("SELECT * FROM classroom where places = %d;", places);
+        String sqlQuery = String.format("SELECT * FROM classroom where spaces = %d;", places);
         return query(sqlQuery).get(0);
     }
 
     @Override
     public boolean insertClassroom(Classroom classroom) {
-        int rowsAffected = upsert(String.format("INSERT INTO classroom (name,spaces) VALUES ('%s', %d);", classroom.getName(), classroom.getSpaces()));
+        int rowsAffected = upsert(String.format("INSERT INTO classroom (name, spaces) VALUES ('%s', %d);", classroom.getName(), classroom.getSpaces()));
         return rowsAffected == 1;
     }
+
+    @Override
+    public boolean updateClassroom(Classroom classroom) {
+        int rowsAffected = upsert(String.format("UPDATE classroom SET name = '%s', spaces = %d WHERE id = %d;", classroom.getName(), classroom.getSpaces(), classroom.getId()));
+        return rowsAffected == 1;
+    }
+
 
 
     @Override

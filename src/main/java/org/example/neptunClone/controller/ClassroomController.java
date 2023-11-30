@@ -20,6 +20,8 @@ public class ClassroomController {
         this.classroomService = classroomService;
     }
 
+
+    /*          READ         */
     @GetMapping(path = "/")
     public List<Classroom> getAllClassroom() throws SQLException {
         return classroomService.getAllClassroom();
@@ -30,15 +32,17 @@ public class ClassroomController {
         return classroomService.getClassroomById(id);
     }
 
-    @GetMapping(path = "/name",params = "name")
+    @GetMapping(path = "/name", params = "name")
     public Classroom getClassroomByName(@RequestParam("name") String name) throws SQLException {
         return classroomService.getClassroomByName(name);
     }
 
-    @GetMapping(path="/places", params = "count")
+    @GetMapping(path = "/places", params = "count")
     public Classroom getClassroomByPlaces(@RequestParam("count") int places) throws SQLException {
         return classroomService.getClassroomByPlaces(places);
     }
+
+    /*          CREATE         */
 
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertClassroom(@RequestBody Classroom classroom) {
@@ -49,5 +53,18 @@ public class ClassroomController {
 
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
         //test
+    }
+
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public ResponseEntity<Void> updateClassroom(@RequestBody Classroom newClassroom, @RequestParam int id) throws SQLException {
+        Classroom classroom = classroomService.getClassroomById(id);
+        classroom.setName(newClassroom.getName());
+        classroom.setSpaces(newClassroom.getSpaces());
+        if(classroomService.updateClassroom(classroom)){
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 }

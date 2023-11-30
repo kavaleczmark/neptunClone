@@ -27,6 +27,11 @@ public class SubjectService implements SubjectServiceInterface {
     }
 
     @Override
+    public boolean updateSubject(Subject subject) {
+        return subjectRepositoryInterface.updateSubject(subject);
+    }
+
+    @Override
     public List<Subject> getAllSubject() throws SQLException {
         return subjectRepositoryInterface.getSubject();
     }

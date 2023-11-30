@@ -27,6 +27,11 @@ public class TeacherService implements TeacherServiceInterface {
     }
 
     @Override
+    public boolean updateTeacher(Teacher teacher) {
+        return teacherRepositoryInterface.updateTeacher(teacher);
+    }
+
+    @Override
     public List<Teacher> getAllTeacher() throws SQLException {
         return teacherRepositoryInterface.getTeacher();
     }

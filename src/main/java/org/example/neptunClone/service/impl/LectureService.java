@@ -28,6 +28,11 @@ public class LectureService implements LectureServiceInterface {
     }
 
     @Override
+    public boolean updateLecture(Lecture lecture) {
+        return lectureRepositoryInterface.updateLecture(lecture);
+    }
+
+    @Override
     public List<Lecture> getAllLecture() throws SQLException {
         return lectureRepositoryInterface.getLecture();
     }
@@ -59,42 +64,5 @@ public class LectureService implements LectureServiceInterface {
     @Override
     public List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException {
         return lectureRepositoryInterface.getLectureByStudentsPlaces(places);
-    }
-
-    // TODO implement rest of CRUD
-
-    @Override
-    public void deleteLecture(Long id) {
-
-    }
-
-    @Override
-    public void insertLecture(String teacher, String subject, int time, String classroom, int places) {
-
-    }
-
-    @Override
-    public void updateLectureTeacher(Long id, String teacher) {
-
-    }
-
-    @Override
-    public void updateLectureSubject(Long id, String subject) {
-
-    }
-
-    @Override
-    public void updateLectureTime(Long id, int time) {
-
-    }
-
-    @Override
-    public void updateLectureClassroom(Long id, String classroom) {
-
-    }
-
-    @Override
-    public void updateLecturePlaces(Long id, int places) {
-
     }
 }

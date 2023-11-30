@@ -1,6 +1,5 @@
 package org.example.neptunClone.controller;
 
-import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.model.Teacher;
 import org.example.neptunClone.service.impl.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
+    /*          READ         */
     @GetMapping(path = "/")
     public List<Teacher> getAllTeacher() throws SQLException {
         return teacherService.getAllTeacher();
@@ -35,10 +35,13 @@ public class TeacherController {
     public Teacher getTeacherByName(@RequestParam("name") String name) throws SQLException {
         return teacherService.getTeacherByName(name);
     }
+
     @GetMapping(path = "/subject_id", params = "subjectId")
     public List<Teacher> getTeacherBySubjectId(@RequestParam("subjectId") int subject_id) throws SQLException {
         return teacherService.getTeacherBySubjectId(subject_id);
     }
+
+    /*          CREATE         */
     @PostMapping(path = "/")
     public ResponseEntity<Void> insertTeacher(@RequestBody Teacher teacher) throws SQLException {
         boolean result = teacherService.addTeacher(teacher);
@@ -49,4 +52,16 @@ public class TeacherController {
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
 
+    /*          UPDATE         */
+
+    @PutMapping(path = "/", params = "id")
+    public ResponseEntity<Void> updateTeacher(@RequestBody Teacher newTeacher, @RequestParam int id) throws SQLException {
+        Teacher teacher = teacherService.getTeacherById(id);
+        teacher.setName(newTeacher.getName());
+        teacher.setSubject_id(newTeacher.getSubject_id());
+        if (teacherService.updateTeacher(teacher)) {
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
 }

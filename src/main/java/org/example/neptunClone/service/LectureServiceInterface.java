@@ -9,6 +9,7 @@ import java.util.List;
 public interface LectureServiceInterface {
 
     boolean addLecture(Lecture lecture) throws SQLException;
+    boolean updateLecture(Lecture lecture);
     List<Lecture> getAllLecture() throws SQLException;
     Lecture getLecturerById(int id) throws SQLException;
     List<Lecture> getLectureByTeacherId(int id) throws SQLException;
@@ -17,14 +18,4 @@ public interface LectureServiceInterface {
     List<Lecture> getLectureByClassroomId(int id) throws SQLException;
     List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException;
 
-    /****************************/
-    void deleteLecture(Long id);
-    void insertLecture(String teacher, String subject, int time, String classroom, int places);
-
-
-    void updateLectureTeacher(Long id, String teacher);
-    void updateLectureSubject(Long id, String subject);
-    void updateLectureTime(Long id, int time);
-    void updateLectureClassroom(Long id, String classroom);
-    void updateLecturePlaces(Long id, int places);
 }

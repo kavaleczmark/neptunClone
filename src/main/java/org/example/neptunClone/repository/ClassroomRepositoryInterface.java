@@ -14,4 +14,5 @@ public interface ClassroomRepositoryInterface {
     public Classroom getClassroomByName(String name) throws SQLException;
     public Classroom getClassroomByPlaces(int places) throws SQLException;
     public boolean insertClassroom(Classroom classroom);
+    public boolean updateClassroom(Classroom classroom);
 }

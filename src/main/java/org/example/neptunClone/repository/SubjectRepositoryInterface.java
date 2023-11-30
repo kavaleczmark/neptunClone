@@ -15,4 +15,5 @@ public interface SubjectRepositoryInterface {
     public Subject getSubjectByName(String name) throws SQLException;
 
     public boolean insertSubject(Subject subject);
+    public boolean updateSubject(Subject subject);
 }

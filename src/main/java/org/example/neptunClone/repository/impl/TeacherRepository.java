@@ -41,6 +41,12 @@ public class TeacherRepository extends GenericDataAccess<Teacher> implements Tea
         int rowsAffected = upsert(String.format("INSERT INTO teacher (name, subject_id) VALUES ('%s', %d);", teacher.getName(), teacher.getSubject_id()));
         return rowsAffected == 1;
     }
+
+    @Override
+    public boolean updateTeacher(Teacher teacher) {
+        int rowsAffected = upsert(String.format("UPDATE teacher SET name = '%s', subject_id = %d WHERE id = %d;", teacher.getName(), teacher.getSubject_id(), teacher.getId()));
+        return rowsAffected == 1;
+    }
     @Override
     List<Teacher> map(ResultSet resultSet) throws SQLException {
         List<Teacher> teachers = new ArrayList<>();

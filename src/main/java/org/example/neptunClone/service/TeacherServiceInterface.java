@@ -10,6 +10,7 @@ import java.util.List;
 public interface TeacherServiceInterface {
 
     boolean addTeacher(Teacher teacher) throws SQLException;
+    boolean updateTeacher(Teacher teacher);
     List<Teacher> getAllTeacher() throws SQLException;
     Teacher getTeacherById(int id) throws SQLException;
     Teacher getTeacherByName(String name) throws SQLException;
