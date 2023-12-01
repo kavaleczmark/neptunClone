@@ -64,4 +64,14 @@ public class TeacherController {
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
+
+    /*          DELETE         */
+    @DeleteMapping(path = "/", params = "id")
+    public ResponseEntity<Void> deleteTeacher(@RequestParam("id") int id) throws SQLException {
+        boolean result = teacherService.deleteTeacher(id);
+        if (result) {
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
 }

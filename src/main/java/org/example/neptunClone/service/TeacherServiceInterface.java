@@ -15,4 +15,5 @@ public interface TeacherServiceInterface {
     Teacher getTeacherById(int id) throws SQLException;
     Teacher getTeacherByName(String name) throws SQLException;
     List<Teacher> getTeacherBySubjectId(int subject_id) throws SQLException;
+    boolean deleteTeacher(int id) throws SQLException;
 }

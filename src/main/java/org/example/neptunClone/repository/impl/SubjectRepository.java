@@ -42,6 +42,12 @@ public class SubjectRepository extends GenericDataAccess<Subject> implements Sub
     }
 
     @Override
+    public boolean deleteSubject(int id) {
+        String sqlQuery = String.format("DELETE FROM subject WHERE id = %d", id);
+        return (delete(sqlQuery));
+    }
+
+    @Override
     List<Subject> map(ResultSet resultSet) throws SQLException {
         List<Subject> subjects = new ArrayList<>();
         while (resultSet.next()) {

@@ -62,4 +62,14 @@ public class SubjectController {
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
+
+    /*          DELETE         */
+    @DeleteMapping(path = "/", params = "id")
+    public ResponseEntity<Void> deleteSubject(@RequestParam("id") int id) throws SQLException {
+        boolean result = subjectService.deleteSubject(id);
+        if (result) {
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
 }

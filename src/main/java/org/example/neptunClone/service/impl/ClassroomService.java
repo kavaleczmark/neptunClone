@@ -32,6 +32,11 @@ public class ClassroomService implements ClassroomServiceInterface {
     }
 
     @Override
+    public boolean deleteClassroom(int id) throws SQLException {
+       return classroomRepository.deleteClassroom(id);
+    }
+
+    @Override
     public List<Classroom> getAllClassroom() throws SQLException {
         return classroomRepository.getClassroom();
     }

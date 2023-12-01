@@ -18,7 +18,7 @@ public interface LectureRepositoryInterface {
     public List<Lecture> getLectureByStudentsPlaces(int students_places) throws SQLException;
 
     public boolean insertLecture(Lecture lecture);
-
+    public boolean deleteLecture(int id);
     public boolean updateLecture(Lecture lecture);
 
 }

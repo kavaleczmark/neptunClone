@@ -67,4 +67,14 @@ public class ClassroomController {
         }
         return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
     }
+
+    /*          DELETE         */
+    @DeleteMapping(path = "/", params = "id")
+    public ResponseEntity<Void> deleteClassroom(@RequestParam("id") int id) throws SQLException {
+        boolean result = classroomService.deleteClassroom(id);
+        if (result) {
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }
+        return new ResponseEntity<Void>(HttpStatus.NOT_MODIFIED);
+    }
 }

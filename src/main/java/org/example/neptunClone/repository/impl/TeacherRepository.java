@@ -43,6 +43,12 @@ public class TeacherRepository extends GenericDataAccess<Teacher> implements Tea
     }
 
     @Override
+    public boolean deleteTeacher(int id) {
+        String sqlQuery = String.format("DELETE FROM teacher WHERE id = %d", id);
+        return (delete(sqlQuery));
+    }
+
+    @Override
     public boolean updateTeacher(Teacher teacher) {
         int rowsAffected = upsert(String.format("UPDATE teacher SET name = '%s', subject_id = %d WHERE id = %d;", teacher.getName(), teacher.getSubject_id(), teacher.getId()));
         return rowsAffected == 1;

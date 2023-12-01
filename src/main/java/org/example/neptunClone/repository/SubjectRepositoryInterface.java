@@ -16,4 +16,5 @@ public interface SubjectRepositoryInterface {
 
     public boolean insertSubject(Subject subject);
     public boolean updateSubject(Subject subject);
+    public boolean deleteSubject(int id);
 }

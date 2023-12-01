@@ -65,4 +65,9 @@ public class LectureService implements LectureServiceInterface {
     public List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException {
         return lectureRepositoryInterface.getLectureByStudentsPlaces(places);
     }
+
+    @Override
+    public boolean deleteLecture(int id) throws SQLException {
+        return lectureRepositoryInterface.deleteLecture(id);
+    }
 }

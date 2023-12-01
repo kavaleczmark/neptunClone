@@ -25,26 +25,42 @@ public abstract class GenericDataAccess<T> implements GenericDataAccessInterface
             resultSet = queryImpl(connection, sqlQuery);
             return map(resultSet);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("An exception occured when QUERYING from database: " + e.getMessage());
         }
+    }
+    // delete
+    public boolean delete(String sqlQuery){
+        try (Connection connection = DriverManager.getConnection(dbUrl, user, pw)){
+            if(! deleteImpl(connection, sqlQuery)){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("An exception occured when DELETING a row from database: " + e.getMessage());
+        }
+        return false;
     }
     // insert and update
     public int upsert(String sqlQuery) {
         try(Connection connection = DriverManager.getConnection(dbUrl, user, pw)){
             return upsertImpl(connection, sqlQuery);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+                throw new RuntimeException("An exception occured when INSERTING OR UPDATING a row from database: " + e.getMessage());
         }
     }
+    private boolean deleteImpl(Connection connection, String sqlQuery) throws SQLException {
+        return createStatement(connection).execute(sqlQuery);
+        // execute() returns false if no results
+    }
+
 
     private ResultSet queryImpl(Connection connection, String sqlQuery) throws SQLException {
-        ResultSet resultSet = createStatement(connection).executeQuery(sqlQuery);
-        return resultSet;
+        return createStatement(connection).executeQuery(sqlQuery);
     }
 
     private int upsertImpl(Connection connection, String sqlQuery) throws SQLException {
         return createStatement(connection).executeUpdate(sqlQuery);
     }
+
 
     private Statement createStatement(Connection connection) throws SQLException {
         return connection.createStatement();

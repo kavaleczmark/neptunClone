@@ -50,4 +50,9 @@ public class TeacherService implements TeacherServiceInterface {
     public List<Teacher> getTeacherBySubjectId(int subject_id) throws SQLException {
         return teacherRepositoryInterface.getTeacherBySubjectId(subject_id);
     }
+
+    @Override
+    public boolean deleteTeacher(int id) throws SQLException {
+        return teacherRepositoryInterface.deleteTeacher(id);
+    }
 }

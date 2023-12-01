@@ -15,7 +15,7 @@ public interface TeacherRepositoryInterface {
     public List<Teacher> getTeacherBySubjectId(int subject_id) throws SQLException;
 
     public boolean insertTeacher(Teacher teacher);
-
+    public boolean deleteTeacher(int id);
     public boolean updateTeacher(Teacher teacher);
 
 }

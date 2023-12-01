@@ -12,4 +12,5 @@ public interface SubjectServiceInterface {
     List<Subject> getAllSubject() throws SQLException;
     Subject getSubjectById(int id) throws SQLException;
     Subject getSubjectByName(String name) throws SQLException;
+    boolean deleteSubject(int id) throws SQLException;
 }

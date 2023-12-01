@@ -17,5 +17,5 @@ public interface LectureServiceInterface {
     List<Lecture> getLectureByTime(int time) throws SQLException;
     List<Lecture> getLectureByClassroomId(int id) throws SQLException;
     List<Lecture> getLectureByStudentsPlaces(int places) throws SQLException;
-
+    boolean deleteLecture(int id) throws SQLException;
 }

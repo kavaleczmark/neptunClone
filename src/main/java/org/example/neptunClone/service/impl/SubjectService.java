@@ -45,4 +45,9 @@ public class SubjectService implements SubjectServiceInterface {
     public Subject getSubjectByName(String name) throws SQLException {
         return subjectRepositoryInterface.getSubjectByName(name);
     }
+
+    @Override
+    public boolean deleteSubject(int id) throws SQLException {
+        return subjectRepositoryInterface.deleteSubject(id);
+    }
 }

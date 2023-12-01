@@ -4,6 +4,7 @@ import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.repository.ClassroomRepositoryInterface;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,6 +48,11 @@ public class ClassroomRepository extends GenericDataAccess<Classroom> implements
         return rowsAffected == 1;
     }
 
+    @Override
+    public boolean deleteClassroom(int id) throws SQLException {
+        String sqlQuery = String.format("DELETE FROM classroom WHERE id = %d", id);
+        return (delete(sqlQuery));
+    }
 
 
     @Override
