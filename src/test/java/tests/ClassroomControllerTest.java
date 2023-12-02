@@ -114,4 +114,24 @@ public class ClassroomControllerTest {
         ResponseEntity<Void> result = classroomController.updateClassroom(updatedClassroom, id);
         assertEquals(HttpStatus.NOT_MODIFIED.value(), result.getStatusCodeValue());
     }
+
+    @Test
+    public void testDeleteClassroom_Successful() throws SQLException {
+        int id = 1;
+        when(classroomService.deleteClassroom(id)).thenReturn(true);
+        ClassroomController classroomController = new ClassroomController(classroomService);
+        ResponseEntity<Void> response = classroomController.deleteClassroom(id);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(classroomService, times(1)).deleteClassroom(id);
+    }
+
+    @Test
+    public void testDeleteClassroom_Failure() throws SQLException {
+        int id = 1;
+        when(classroomService.deleteClassroom(id)).thenReturn(false);
+        ClassroomController classroomController = new ClassroomController(classroomService);
+        ResponseEntity<Void> response = classroomController.deleteClassroom(id);
+        assertEquals(HttpStatus.NOT_MODIFIED, response.getStatusCode());
+        verify(classroomService, times(1)).deleteClassroom(id);
+    }
 }
