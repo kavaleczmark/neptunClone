@@ -165,7 +165,6 @@ public class LectureControllerTest {
     }
     @Test
     void testGetLectureByTime() throws SQLException {
-        // Arrange
         int time = 9;
         List<Lecture> lectures = Arrays.asList(
                 new Lecture(1, 9, 50, 1, 1, 1),
@@ -173,10 +172,8 @@ public class LectureControllerTest {
         );
         when(lectureService.getLectureByTime(time)).thenReturn(lectures);
 
-        // Act
         List<Lecture> result = lectureController.getLectureByTime(time);
 
-        // Assert
         assertEquals(2, result.size());
         assertEquals(1, result.get(0).getId());
         assertEquals(2, result.get(1).getId());
@@ -185,7 +182,6 @@ public class LectureControllerTest {
 
     @Test
     void testGetLectureByStudentsPlaces() throws SQLException {
-        // Arrange
         int places = 50;
         List<Lecture> lectures = Arrays.asList(
                 new Lecture(1, 9, 50, 1, 1, 1),
@@ -193,10 +189,8 @@ public class LectureControllerTest {
         );
         when(lectureService.getLectureByStudentsPlaces(places)).thenReturn(lectures);
 
-        // Act
         List<Lecture> result = lectureController.getLectureByStudentsPlaces(places);
 
-        // Assert
         assertEquals(2, result.size());
         assertEquals(1, result.get(0).getId());
         assertEquals(2, result.get(1).getId());
