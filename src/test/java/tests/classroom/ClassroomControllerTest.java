@@ -1,4 +1,4 @@
-package tests;
+package tests.classroom;
 
 import org.example.neptunClone.controller.ClassroomController;
 import org.example.neptunClone.model.Classroom;

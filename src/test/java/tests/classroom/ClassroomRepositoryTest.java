@@ -1,4 +1,4 @@
-package tests;
+package tests.classroom;
 
 import org.example.neptunClone.model.Classroom;
 import org.example.neptunClone.repository.impl.ClassroomRepository;
@@ -25,7 +25,7 @@ public class ClassroomRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-        classroom = new Classroom(1, "A001", 20);
+        classroom = new Classroom(1, "B.111", 100);
     }
 
     @Test
@@ -45,14 +45,9 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testGetClassroomById_ReturnsClassroomWithGivenId() throws SQLException {
-        // Given
         int id = classroom.getId();
         when(classroomRepository.getClassroomById(id)).thenReturn(classroom);
-
-        // When
         Classroom actualClassroom = classroomRepository.getClassroomById(id);
-
-        // Then
         assertEquals(classroom, actualClassroom);
         verify(classroomRepository, times(1)).getClassroomById(id);
     }
@@ -113,18 +108,13 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testGetClassroom_Successful() throws SQLException {
-        // Given
-        Classroom classroom1 = new Classroom(1, "A001", 20);
-        Classroom classroom2 = new Classroom(2, "B001", 30);
+        Classroom classroom1 = new Classroom(1, "B.111", 100);
+        Classroom classroom2 = new Classroom(2, "B.113", 250);
         List<Classroom> expectedClassrooms = new ArrayList<>();
         expectedClassrooms.add(classroom1);
         expectedClassrooms.add(classroom2);
         when(classroomRepository.getClassroom()).thenReturn(expectedClassrooms);
-
-        // When
         List<Classroom> actualClassrooms = classroomRepository.getClassroom();
-
-        // Then
         assertEquals(expectedClassrooms.size(), actualClassrooms.size());
         assertEquals(expectedClassrooms.get(0), actualClassrooms.get(0));
         assertEquals(expectedClassrooms.get(1), actualClassrooms.get(1));
@@ -133,30 +123,81 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testGetClassroomById_Successful() throws SQLException {
-        // Given
         int id = 1;
-        Classroom expectedClassroom = new Classroom(1, "A001", 20);
+        Classroom expectedClassroom = new Classroom(1, "B.111", 100);
         when(classroomRepository.getClassroomById(id)).thenReturn(expectedClassroom);
-
-        // When
         Classroom actualClassroom = classroomRepository.getClassroomById(id);
-
-        // Then
         assertEquals(expectedClassroom, actualClassroom);
         verify(classroomRepository, times(1)).getClassroomById(id);
     }
 
     @Test
     public void testInsertClassroom_Successful() {
-        // Given
-        Classroom classroom = new Classroom(1, "A001", 20);
+        Classroom classroom = new Classroom(1, "B.111", 100);
         when(classroomRepository.insertClassroom(classroom)).thenReturn(true);
+        boolean result = classroomRepository.insertClassroom(classroom);
+        assertTrue(result);
+        verify(classroomRepository, times(1)).insertClassroom(classroom);
+    }
+
+    @Test
+    public void testUpdateClassroom_ReturnsTrueWhenUpdateSuccessful() throws SQLException {
+        // Given
+        ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
+        Classroom classroom = new Classroom(1, "B.111", 100);
+        when(classroomRepository.updateClassroom(classroom)).thenReturn(true);
 
         // When
-        boolean result = classroomRepository.insertClassroom(classroom);
+        boolean result = classroomRepository.updateClassroom(classroom);
 
         // Then
         assertTrue(result);
-        verify(classroomRepository, times(1)).insertClassroom(classroom);
+        verify(classroomRepository, times(1)).updateClassroom(classroom);
+    }
+
+    @Test
+    public void testUpdateClassroom_ReturnsFalseWhenUpdateFails() throws SQLException {
+        // Given
+        ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
+        Classroom classroom = new Classroom(1, "B.111", 100);
+        when(classroomRepository.updateClassroom(classroom)).thenReturn(false);
+
+        // When
+        boolean result = classroomRepository.updateClassroom(classroom);
+
+        // Then
+        assertFalse(result);
+        verify(classroomRepository, times(1)).updateClassroom(classroom);
+    }
+
+
+    @Test
+    public void testDeleteClassroom_ReturnsTrueWhenDeleteSuccessful() throws SQLException {
+        // Given
+        ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
+        int id = 1;
+        when(classroomRepository.deleteClassroom(id)).thenReturn(true);
+
+        // When
+        boolean result = classroomRepository.deleteClassroom(id);
+
+        // Then
+        assertTrue(result);
+        verify(classroomRepository, times(1)).deleteClassroom(id);
+    }
+
+    @Test
+    public void testDeleteClassroom_ReturnsFalseWhenDeleteFails() throws SQLException {
+        // Given
+        ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
+        int id = 1;
+        when(classroomRepository.deleteClassroom(id)).thenReturn(false);
+
+        // When
+        boolean result = classroomRepository.deleteClassroom(id);
+
+        // Then
+        assertFalse(result);
+        verify(classroomRepository, times(1)).deleteClassroom(id);
     }
 }
