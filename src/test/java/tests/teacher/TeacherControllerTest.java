@@ -12,8 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -87,5 +89,39 @@ public class TeacherControllerTest {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         verify(teacherService, times(1)).deleteTeacher(1);
+    }
+
+    @Test
+    public void testGetTeacherBySubjectId() throws SQLException {
+        int subjectId = 1;
+        List<Teacher> teachers = Arrays.asList(
+                new Teacher(1, "Nagy József", 1),
+                new Teacher(2, "Kiss Piroska", 1)
+        );
+        when(teacherService.getTeacherBySubjectId(subjectId)).thenReturn(teachers);
+
+        List<Teacher> result = teacherController.getTeacherBySubjectId(subjectId);
+
+        assertEquals(2, result.size());
+        assertEquals(1, result.get(0).getId());
+        assertEquals("Nagy József", result.get(0).getName());
+        assertEquals(1, result.get(0).getSubject_id());
+        assertEquals(2, result.get(1).getId());
+        assertEquals("Kiss Piroska", result.get(1).getName());
+        assertEquals(1, result.get(1).getSubject_id());
+
+        verify(teacherService, times(1)).getTeacherBySubjectId(subjectId);
+    }
+
+    @Test
+    public void testGetTeacherBySubjectIdNotFound() throws SQLException {
+        int subjectId = 1;
+        when(teacherService.getTeacherBySubjectId(subjectId)).thenReturn(Collections.emptyList());
+
+        List<Teacher> result = teacherController.getTeacherBySubjectId(subjectId);
+
+        assertTrue(result.isEmpty());
+
+        verify(teacherService, times(1)).getTeacherBySubjectId(subjectId);
     }
 }
