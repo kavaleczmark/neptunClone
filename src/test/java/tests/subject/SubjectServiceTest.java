@@ -1,4 +1,5 @@
 package tests.subject;
+
 import org.example.neptunClone.model.Subject;
 import org.example.neptunClone.repository.SubjectRepositoryInterface;
 import org.example.neptunClone.service.impl.SubjectService;
@@ -7,11 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
