@@ -117,7 +117,7 @@ public class SubjectControllerTest {
 
     @Test
     void getSubjectByName_ShouldThrowExceptionWhenNameIsEmpty() throws SQLException {
-        String subjectName = "";
+        String subjectName = "Matek";
         when(subjectService.getSubjectByName(subjectName)).thenThrow(new IllegalArgumentException("Name is Illegal"));
         assertThrows(IllegalArgumentException.class, () -> subjectController.getSubjectByName(subjectName));
     }
