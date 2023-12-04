@@ -29,15 +29,10 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testGetClassroom_ReturnsListOfClassrooms() throws SQLException {
-        // Given
         List<Classroom> expectedClassrooms = new ArrayList<>();
         expectedClassrooms.add(classroom);
         when(classroomRepository.getClassroom()).thenReturn(expectedClassrooms);
-
-        // When
         List<Classroom> actualClassrooms = classroomRepository.getClassroom();
-
-        // Then
         assertEquals(expectedClassrooms, actualClassrooms);
         verify(classroomRepository, times(1)).getClassroom();
     }
@@ -53,54 +48,34 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testGetClassroomByName_ReturnsClassroomWithGivenName() throws SQLException {
-        // Given
         String name = classroom.getName();
         when(classroomRepository.getClassroomByName(name)).thenReturn(classroom);
-
-        // When
         Classroom actualClassroom = classroomRepository.getClassroomByName(name);
-
-        // Then
         assertEquals(classroom, actualClassroom);
         verify(classroomRepository, times(1)).getClassroomByName(name);
     }
 
     @Test
     public void testGetClassroomByPlaces_ReturnsClassroomWithGivenPlaces() throws SQLException {
-        // Given
         int places = classroom.getSpaces();
         when(classroomRepository.getClassroomByPlaces(places)).thenReturn(classroom);
-
-        // When
         Classroom actualClassroom = classroomRepository.getClassroomByPlaces(places);
-
-        // Then
         assertEquals(classroom, actualClassroom);
         verify(classroomRepository, times(1)).getClassroomByPlaces(places);
     }
 
     @Test
     public void testInsertClassroom_ReturnsTrueWhenInsertSuccessful() throws SQLException {
-        // Given
         when(classroomRepository.insertClassroom(classroom)).thenReturn(true);
-
-        // When
         boolean result = classroomRepository.insertClassroom(classroom);
-
-        // Then
         assertTrue(result);
         verify(classroomRepository, times(1)).insertClassroom(classroom);
     }
 
     @Test
     public void testInsertClassroom_ReturnsFalseWhenInsertUnsuccessful() throws SQLException {
-        // Given
         when(classroomRepository.insertClassroom(classroom)).thenReturn(false);
-
-        // When
         boolean result = classroomRepository.insertClassroom(classroom);
-
-        // Then
         assertFalse(result);
         verify(classroomRepository, times(1)).insertClassroom(classroom);
     }
@@ -141,30 +116,20 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testUpdateClassroom_ReturnsTrueWhenUpdateSuccessful() throws SQLException {
-        // Given
         ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
         Classroom classroom = new Classroom(1, "B.111", 100);
         when(classroomRepository.updateClassroom(classroom)).thenReturn(true);
-
-        // When
         boolean result = classroomRepository.updateClassroom(classroom);
-
-        // Then
         assertTrue(result);
         verify(classroomRepository, times(1)).updateClassroom(classroom);
     }
 
     @Test
     public void testUpdateClassroom_ReturnsFalseWhenUpdateFails() throws SQLException {
-        // Given
         ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
         Classroom classroom = new Classroom(1, "B.111", 100);
         when(classroomRepository.updateClassroom(classroom)).thenReturn(false);
-
-        // When
         boolean result = classroomRepository.updateClassroom(classroom);
-
-        // Then
         assertFalse(result);
         verify(classroomRepository, times(1)).updateClassroom(classroom);
     }
@@ -172,30 +137,20 @@ public class ClassroomRepositoryTest {
 
     @Test
     public void testDeleteClassroom_ReturnsTrueWhenDeleteSuccessful() throws SQLException {
-        // Given
         ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
         int id = 1;
         when(classroomRepository.deleteClassroom(id)).thenReturn(true);
-
-        // When
         boolean result = classroomRepository.deleteClassroom(id);
-
-        // Then
         assertTrue(result);
         verify(classroomRepository, times(1)).deleteClassroom(id);
     }
 
     @Test
     public void testDeleteClassroom_ReturnsFalseWhenDeleteFails() throws SQLException {
-        // Given
         ClassroomRepository classroomRepository = mock(ClassroomRepository.class);
         int id = 1;
         when(classroomRepository.deleteClassroom(id)).thenReturn(false);
-
-        // When
         boolean result = classroomRepository.deleteClassroom(id);
-
-        // Then
         assertFalse(result);
         verify(classroomRepository, times(1)).deleteClassroom(id);
     }
