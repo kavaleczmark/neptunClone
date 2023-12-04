@@ -101,4 +101,17 @@ public class TeacherRepositoryTest {
         assertTrue(result);
         verify(teacherRepository, times(1)).deleteTeacher(teacherId);
     }
+
+    @Test
+    public void testGetTeacherByName() throws SQLException {
+        String teacherName = "Nagy József";
+        Teacher expectedTeacher = new Teacher(1, teacherName, 1);
+        when(teacherRepository.getTeacherByName(teacherName)).thenReturn(expectedTeacher);
+
+        Teacher result = teacherRepository.getTeacherByName(teacherName);
+
+        assertEquals(expectedTeacher, result);
+        verify(teacherRepository, times(1)).getTeacherByName(teacherName);
+    }
+
 }
