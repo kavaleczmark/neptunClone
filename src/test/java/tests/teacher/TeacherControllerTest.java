@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -124,4 +124,43 @@ public class TeacherControllerTest {
 
         verify(teacherService, times(1)).getTeacherBySubjectId(subjectId);
     }
+
+
+    @Test
+    public void testGetTeacherByIdNotFound() throws SQLException {
+        int teacherId = 123;
+        when(teacherService.getTeacherById(teacherId)).thenReturn(null);
+
+        Teacher result = teacherController.getTeacherById(teacherId);
+
+        assertNull(result);
+
+        verify(teacherService, times(1)).getTeacherById(teacherId);
+    }
+
+    @Test
+    public void testGetTeacherByNameNotFound() throws SQLException {
+        String teacherName = "Nonexistent Teacher";
+        when(teacherService.getTeacherByName(teacherName)).thenReturn(null);
+
+        Teacher result = teacherController.getTeacherByName(teacherName);
+
+        assertNull(result);
+
+        verify(teacherService, times(1)).getTeacherByName(teacherName);
+    }
+
+
+    @Test
+    public void testInsertTeacherNotFound() throws SQLException {
+        Teacher teacher = new Teacher(123, "Nonexistent Teacher", 1);
+        when(teacherService.addTeacher(teacher)).thenReturn(false);
+
+        ResponseEntity<Void> responseEntity = teacherController.insertTeacher(teacher);
+
+        assertEquals(HttpStatus.NOT_MODIFIED, responseEntity.getStatusCode());
+
+        verify(teacherService, times(1)).addTeacher(teacher);
+    }
+
 }
